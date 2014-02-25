@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+		<style>
+			/*some basic reset*/
+			* {margin: 0; padding: 0;}
+			canvas {display: block;}
+			body {background: black;}
+		</style>
+		<title>Parabolic Curve</title>
+	</head>
+	<body>
+		<script>
+		//creating a canvas using JS
+		var canvas = document.createElement("canvas");
+		//making the canvas fullscreen
+		var w = canvas.width = window.innerWidth;
+		var h = canvas.height = window.innerHeight;
+
+		var ctx = canvas.getContext("2d");
+		//appending the canvas to the body
+		document.body.appendChild(canvas);
+
+		var pointCount 		= window.innerHeight;	//Number of points to create
+		var pointDisatance	= 5;					//Point distance
+		var numberOfPoints 	= pointCount / pointDisatance;
+		
+		var pixelsX = [];
+		var pixelsY = [];
+		
+		for (var x = 0; x < pointCount; x+=pointDisatance) {
+			pixelsX.push(x);
+		}
+		
+		for (var y = 0; y < pointCount; y+=pointDisatance) {
+			pixelsY.push(y);
+		}
+
+		function render() {
+			ctx.clearRect(0,0,w,h);
+		  
+			//Bottom Left Curve
+			for (var x = pixelsX.length; x > 0; x--) {
+				ctx.beginPath();							//Start the path
+				ctx.moveTo(x*pointDisatance, pointCount);	//I move the x point by 5 each time and keep the other plane the same
+				ctx.lineTo(0, pixelsX[x]);					//Set the next point to x:0 y: (The value in the pixelsX array at position X) 
+				ctx.strokeStyle = "rgb("+Math.round(Math.random() * 255 + 0)+","+Math.round(Math.random() * 255 + 0)+","+Math.round(Math.random() * 255 + 0)+")";	//Random because yes
+				ctx.stroke();								//Draw the line
+			}
+			
+			//Bottom Right Curve
+			for (var x = pixelsX.length; x > 0; x--) {
+				ctx.beginPath();
+				ctx.moveTo(pointCount, x*pointDisatance);
+				ctx.lineTo(pointCount-pixelsX[x], pointCount);
+				ctx.strokeStyle = "rgb("+Math.round(Math.random() * 255 + 0)+","+Math.round(Math.random() * 255 + 0)+","+Math.round(Math.random() * 255 + 0)+")";
+				ctx.stroke();
+			}			
+			console.log("Number of points used: " + numberOfPoints);
+		}
+
+		render();
+		</script>
+	</body>
+</html>

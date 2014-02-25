@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+	<head>
+		<style>
+			/*some basic reset*/
+			* {margin: 0; padding: 0;}
+			canvas {display: block;}
+			body {background: black;}
+		</style>
+		<title>Parabolic Curve</title>
+	</head>
+	<body>
+		<script>
+			function render(){ctx.clearRect(0,0,w,h);for(var e=pixelsX.length;e>0;e--){ctx.beginPath();ctx.moveTo(e*pointDisatance,pointCount);ctx.lineTo(0,pixelsX[e]);ctx.strokeStyle="rgb("+Math.round(Math.random()*255+0)+","+Math.round(Math.random()*255+0)+","+Math.round(Math.random()*255+0)+")";ctx.stroke()}for(var e=pixelsX.length;e>0;e--){ctx.beginPath();ctx.moveTo(pointCount,e*pointDisatance);ctx.lineTo(pointCount-pixelsX[e],pointCount);ctx.strokeStyle="rgb("+Math.round(Math.random()*255+0)+","+Math.round(Math.random()*255+0)+","+Math.round(Math.random()*255+0)+")";ctx.stroke()}console.log("Number of points used: "+numberOfPoints)}var canvas=document.createElement("canvas");var w=canvas.width=window.innerWidth;var h=canvas.height=window.innerHeight;var ctx=canvas.getContext("2d");document.body.appendChild(canvas);var pointCount=window.innerHeight;var pointDisatance=5;var numberOfPoints=pointCount/pointDisatance;var pixelsX=[];var pixelsY=[];for(var x=0;x<pointCount;x+=pointDisatance){pixelsX.push(x)}for(var y=0;y<pointCount;y+=pointDisatance){pixelsY.push(y)}render()
+		</script>
+	</body>
+</html>
